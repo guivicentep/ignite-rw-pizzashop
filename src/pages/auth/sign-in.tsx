@@ -23,13 +23,13 @@ export function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInForm>()
 
-  const {} = useMutation({
+  const { mutateAsync: authenticate } = useMutation({
     mutationFn: signIn,
   })
 
   async function handleSignIn(data: SignInForm) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await authenticate({ email: data.email })
 
       toast.success('Enviamos um link de autenticação para o seu e-mail', {
         action: {
